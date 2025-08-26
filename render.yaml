@@ -10,9 +10,7 @@ services:
         value: 3.11.0
       - key: PORT
         value: 8000
-      - key: PLAYWRIGHT_BROWSERS_PATH
-        value: /app/.cache/ms-playwright
     buildCommand: docker build -t arb-backend .
-    startCommand: docker run -p $PORT:8000 -e PLAYWRIGHT_BROWSERS_PATH=/app/.cache/ms-playwright arb-backend
+    startCommand: docker run -p $PORT:8000 arb-backend
     autoDeploy: true
     branch: main
