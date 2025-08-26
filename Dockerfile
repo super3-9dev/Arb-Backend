@@ -13,6 +13,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
+# Make startup script executable
+RUN chmod +x start.sh
+
+# Test module imports
+RUN python test_imports.py
+
 # Verify Playwright installation
 RUN python verify_playwright.py
 
@@ -27,5 +33,5 @@ ENV PYTHONUNBUFFERED=1
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/summary || exit 1
 
-# Run the application
-CMD ["python", "server.py"]
+# Run the application using startup script
+CMD ["./start.sh"]
