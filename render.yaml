@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: arb-backend
+    env: docker
+    plan: starter
+    region: oregon
+    healthCheckPath: /summary
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        value: 8000
+    buildCommand: docker build -t arb-backend .
+    startCommand: docker run -p $PORT:8000 arb-backend
+    autoDeploy: true
+    branch: main
